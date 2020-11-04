@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -29,18 +28,6 @@ type Config struct {
 type Account struct {
 	Name   string `json:"name"`
 	Secret string `json:"secret"`
-}
-
-func getInput(input chan string) {
-	for {
-		in := bufio.NewReader(os.Stdin)
-		result, err := in.ReadString('\n')
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		input <- result
-	}
 }
 
 func readConfig(password, filename string) (Config, error) {
@@ -74,54 +61,7 @@ func writeConfig(config Config, filename string) error {
 	return nil
 }
 
-func gomain() {
-
-	password, err := readPasswordOld("Enter password: ", false)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("\nLoading...")
-
-	//data := []byte("{\"accounts\":[{\"name\":\"test\",\"secret\":\"4S62BZNFXXSZLCRO\"}]}")
-	//err = file.Write(password, "secrets.txt", data)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-
-	data, err := file.Read(password, "secrets.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = json.Unmarshal(data, &config)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	input := make(chan string, 1)
-	go getInput(input)
-
-	for {
-		for i := 0; i < len(config.Accounts); i++ {
-			a := config.Accounts[i]
-			totp := gotp.NewDefaultTOTP(a.Secret)
-			//token := totp.At(1524485781)
-			token := totp.Now()
-			fmt.Printf("%d. %s: %s\n", i, config.Accounts[i].Name, token)
-		}
-
-		select {
-		case <-input:
-			os.Exit(0)
-		case <-time.After(10000 * time.Millisecond):
-			continue
-		}
-
-	}
-
-}
-
-const filename = "secrets.txt"
+const filename = "config.txt"
 
 // MyConfig is the config
 var config Config
