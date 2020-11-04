@@ -63,7 +63,6 @@ func writeConfig(config Config, filename string) error {
 
 const filename = "config.txt"
 
-// MyConfig is the config
 var config Config
 var password string
 var selectedIndex int
