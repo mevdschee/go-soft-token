@@ -3,14 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/mevdschee/go-soft-token/file"
 	"github.com/xlzd/gotp"
-	"golang.org/x/crypto/ssh/terminal"
 
 	"encoding/base32"
 
@@ -67,19 +65,6 @@ var config Config
 var password string
 var selectedIndex int
 var spinnerIndex int
-
-func readPasswordOld(prompt string, debug bool) (string, error) {
-	fmt.Print(prompt)
-	if debug {
-		return "test", nil
-	}
-	fd := int(os.Stdin.Fd())
-	if !terminal.IsTerminal(fd) {
-		log.Fatal("interactive use required")
-	}
-	password, err := terminal.ReadPassword(fd)
-	return string(password), err
-}
 
 func main() {
 	selectedIndex = 0
