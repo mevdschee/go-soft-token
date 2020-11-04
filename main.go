@@ -215,7 +215,10 @@ func main() {
 		_, err := base32.StdEncoding.DecodeString(a.Secret)
 		if err != nil {
 			warning.SetText(fmt.Sprintf("error: %s", err))
+			pages.HidePage("spinner")
 			pages.ShowPage("warning")
+			warning.SetFocus(0)
+			app.SetFocus(warning)
 			return
 		}
 		nameInput.SetText("")
