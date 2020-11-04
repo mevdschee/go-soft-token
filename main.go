@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mevdschee/gototp/file"
+	"github.com/mevdschee/go-soft-token/file"
 	"github.com/xlzd/gotp"
 	"golang.org/x/crypto/ssh/terminal"
 

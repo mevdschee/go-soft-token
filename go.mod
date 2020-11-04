@@ -1,4 +1,4 @@
-module github.com/mevdschee/gototp
+module github.com/mevdschee/go-soft-token
 
 go 1.13
 
