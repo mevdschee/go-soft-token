@@ -110,21 +110,25 @@ func main() {
 	}
 
 	drawSpinner := func() {
-		spinnerIndex = (spinnerIndex + 1) % 4
-		str := ""
-		for i := 0; i < 4; i++ {
-			if i == spinnerIndex {
-				str += "o"
-			} else {
-				str += "."
-			}
+		frames := []string{
+			"| o    |",
+			"|  o   |",
+			"|   o  |",
+			"|    o |",
+			"|     o|",
+			"|    o |",
+			"|   o  |",
+			"|  o   |",
+			"| o    |",
+			"|o     |",
 		}
-		spinner.SetText(str)
+		spinnerIndex = (spinnerIndex + 1) % len(frames)
+		spinner.SetText(frames[spinnerIndex])
 	}
 
 	updateTimer := func() {
 		for {
-			time.Sleep(500 * time.Millisecond)
+			time.Sleep(250 * time.Millisecond)
 			app.QueueUpdateDraw(func() {
 				drawToken()
 				drawSpinner()
@@ -170,7 +174,6 @@ func main() {
 		})
 
 	spinner.
-		SetText("....").
 		SetTextAlign(tview.AlignCenter).
 		SetTitle(" Loading ").
 		SetTitleColor(tcell.ColorYellow).
