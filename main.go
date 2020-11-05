@@ -358,9 +358,9 @@ func main() {
 				drawToken()
 				buttons.SetFocus(2)
 				app.SetFocus(buttons)
-			} else {
-				app.Stop()
+				return nil
 			}
+			app.Stop()
 			return nil
 		}
 		return event
