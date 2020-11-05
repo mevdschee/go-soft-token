@@ -197,7 +197,7 @@ func main() {
 			confirm.SetFocus(0)
 			app.SetFocus(confirm)
 		}).
-		AddButton("Ok", func() {
+		AddButton("Close", func() {
 			app.Stop()
 		}).
 		AddButton("+", func() {
