@@ -321,10 +321,10 @@ func main() {
 		AddPage("spinner", modal(spinner, 45, 11), true, false)
 
 	keyOverrides := func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Key() == tcell.KeyRight {
+		if event.Key() == tcell.KeyRight || event.Key() == tcell.KeyDown {
 			return tcell.NewEventKey(tcell.KeyTab, '\t', tcell.ModNone)
 		}
-		if event.Key() == tcell.KeyLeft {
+		if event.Key() == tcell.KeyLeft || event.Key() == tcell.KeyUp {
 			return tcell.NewEventKey(tcell.KeyBacktab, '\t', tcell.ModShift)
 		}
 		if event.Key() == tcell.KeyEscape {
