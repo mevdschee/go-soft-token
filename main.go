@@ -144,7 +144,7 @@ func main() {
 		}
 		pages.HidePage("spinner")
 		drawToken()
-		buttons.SetFocus(0)
+		buttons.SetFocus(2)
 		app.SetFocus(buttons)
 	}
 
@@ -156,7 +156,7 @@ func main() {
 				go confirmOkHandler()
 			} else {
 				drawToken()
-				buttons.SetFocus(0)
+				buttons.SetFocus(2)
 				app.SetFocus(buttons)
 			}
 		})
@@ -180,19 +180,14 @@ func main() {
 
 	buttons.
 		SetButtonsAlign(tview.AlignCenter).
-		AddButton("Next", func() {
+		AddButton("<", func() {
 			if len(config.Accounts) == 0 {
 				return
 			}
-			selectedIndex = (selectedIndex + 1) % len(config.Accounts)
+			selectedIndex = (selectedIndex - 1 + len(config.Accounts)) % len(config.Accounts)
 			drawToken()
 		}).
-		AddButton("Add", func() {
-			pages.ShowPage("tokenForm")
-			tokenForm.SetFocus(0)
-			app.SetFocus(tokenForm)
-		}).
-		AddButton("Del", func() {
+		AddButton("-", func() {
 			if len(config.Accounts) == 0 {
 				return
 			}
@@ -202,6 +197,22 @@ func main() {
 			confirm.SetFocus(0)
 			app.SetFocus(confirm)
 		}).
+		AddButton("Ok", func() {
+			app.Stop()
+		}).
+		AddButton("+", func() {
+			pages.ShowPage("tokenForm")
+			tokenForm.SetFocus(0)
+			app.SetFocus(tokenForm)
+		}).
+		AddButton(">", func() {
+			if len(config.Accounts) == 0 {
+				return
+			}
+			selectedIndex = (selectedIndex + 1) % len(config.Accounts)
+			drawToken()
+		}).
+		SetFocus(2).
 		SetBackgroundColor(tcell.NewHexColor(0x222222))
 
 	tokenAddHandler := func() {
@@ -232,7 +243,7 @@ func main() {
 		pages.HidePage("spinner")
 		pages.HidePage("tokenForm")
 		drawToken()
-		buttons.SetFocus(0)
+		buttons.SetFocus(2)
 		app.SetFocus(buttons)
 	}
 
@@ -246,7 +257,7 @@ func main() {
 		AddButton("Cancel", func() {
 			pages.HidePage("tokenForm")
 			drawToken()
-			buttons.SetFocus(0)
+			buttons.SetFocus(2)
 			app.SetFocus(buttons)
 		}).
 		SetTitle(" Add Token ").
@@ -321,23 +332,34 @@ func main() {
 		AddPage("spinner", modal(spinner, 45, 11), true, false)
 
 	keyOverrides := func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Key() == tcell.KeyRight || event.Key() == tcell.KeyDown {
-			return tcell.NewEventKey(tcell.KeyTab, '\t', tcell.ModNone)
-		}
+		frontPage, _ := pages.GetFrontPage()
 		if event.Key() == tcell.KeyLeft || event.Key() == tcell.KeyUp {
+			if frontPage == "tokenText" {
+				if _, button := buttons.GetFocusedItemIndex(); button == 0 {
+					return tcell.NewEventKey(tcell.KeyEnter, '\n', tcell.ModNone)
+				}
+			}
 			return tcell.NewEventKey(tcell.KeyBacktab, '\t', tcell.ModShift)
 		}
+		if event.Key() == tcell.KeyRight || event.Key() == tcell.KeyDown {
+			if frontPage == "tokenText" {
+				if _, button := buttons.GetFocusedItemIndex(); button == 4 {
+					return tcell.NewEventKey(tcell.KeyEnter, '\n', tcell.ModNone)
+				}
+			}
+			return tcell.NewEventKey(tcell.KeyTab, '\t', tcell.ModNone)
+		}
 		if event.Key() == tcell.KeyEscape {
-			name, _ := pages.GetFrontPage()
-			if name == "tokenForm" {
+			if frontPage == "tokenForm" {
 				pages.HidePage("tokenForm")
 				drawToken()
-				buttons.SetFocus(0)
+				buttons.SetFocus(2)
 				app.SetFocus(buttons)
 				return nil
+			} else {
+				app.Stop()
+				return nil
 			}
-			app.Stop()
-			return nil
 		}
 		return event
 	}
