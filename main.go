@@ -320,23 +320,6 @@ func main() {
 		AddPage("passwordForm", modal(passwordForm, 45, 11), true, true).
 		AddPage("spinner", modal(spinner, 45, 11), true, false)
 
-	tokenForm.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		if event.Key() == tcell.KeyRight {
-			return tcell.NewEventKey(tcell.KeyTab, '\t', tcell.ModNone)
-		}
-		if event.Key() == tcell.KeyLeft {
-			return tcell.NewEventKey(tcell.KeyBacktab, '\t', tcell.ModShift)
-		}
-		if event.Key() == tcell.KeyEscape {
-			pages.HidePage("tokenForm")
-			drawToken()
-			buttons.SetFocus(0)
-			app.SetFocus(buttons)
-			return nil
-		}
-		return event
-	})
-
 	keyOverrides := func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyRight {
 			return tcell.NewEventKey(tcell.KeyTab, '\t', tcell.ModNone)
@@ -345,6 +328,14 @@ func main() {
 			return tcell.NewEventKey(tcell.KeyBacktab, '\t', tcell.ModShift)
 		}
 		if event.Key() == tcell.KeyEscape {
+			name, _ := pages.GetFrontPage()
+			if name == "tokenForm" {
+				pages.HidePage("tokenForm")
+				drawToken()
+				buttons.SetFocus(0)
+				app.SetFocus(buttons)
+				return nil
+			}
 			app.Stop()
 			return nil
 		}
@@ -352,6 +343,7 @@ func main() {
 	}
 	buttons.SetInputCapture(keyOverrides)
 	passwordForm.SetInputCapture(keyOverrides)
+	tokenForm.SetInputCapture(keyOverrides)
 
 	go updateTimer()
 	if err := app.SetRoot(pages, true).SetFocus(passwordForm).Run(); err != nil {
