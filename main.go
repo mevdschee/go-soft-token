@@ -333,10 +333,10 @@ func main() {
 
 	exitOnEsc := func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyRight {
-			return tcell.NewEventKey(tcell.KeyTab, ' ', event.Modifiers())
+			return tcell.NewEventKey(tcell.KeyTab, '\t', event.Modifiers())
 		}
 		if event.Key() == tcell.KeyLeft {
-			return tcell.NewEventKey(tcell.KeyTab, ' ', tcell.ModShift)
+			return tcell.NewEventKey(tcell.KeyBacktab, '\t', tcell.ModShift)
 		}
 		if event.Key() == tcell.KeyEscape {
 			app.Stop()
