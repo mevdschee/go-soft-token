@@ -332,6 +332,12 @@ func main() {
 	})
 
 	exitOnEsc := func(event *tcell.EventKey) *tcell.EventKey {
+		if event.Key() == tcell.KeyRight {
+			return tcell.NewEventKey(tcell.KeyTab, ' ', event.Modifiers())
+		}
+		if event.Key() == tcell.KeyLeft {
+			return tcell.NewEventKey(tcell.KeyTab, ' ', tcell.ModShift)
+		}
 		if event.Key() == tcell.KeyEscape {
 			app.Stop()
 			return nil
