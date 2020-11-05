@@ -359,10 +359,9 @@ func main() {
 				buttons.SetFocus(2)
 				app.SetFocus(buttons)
 				return nil
-			} else {
-				app.Stop()
-				return nil
 			}
+			app.Stop()
+			return nil
 		}
 		return event
 	}
