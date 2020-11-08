@@ -1,6 +1,7 @@
 # go-soft-token
 
-A software TOTP implementation that uses scrypt for key stretching and AES for TOTP secret storage.
+A text-based cross-platform software TOTP implementation (compatible with Google Authenticator and Microsoft Authenticator) written in Go.
+This software TOTP implementation uses scrypt for key stretching and AES for TOTP secret storage.
 
 See: https://en.wikipedia.org/wiki/Software_token
 
