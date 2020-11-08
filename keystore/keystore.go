@@ -1,4 +1,4 @@
-package file
+package keystore
 
 import (
 	"crypto/aes"

@@ -7,14 +7,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mevdschee/go-soft-token/file"
 	"github.com/xlzd/gotp"
 
 	"encoding/base32"
 
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
+
+	"github.com/mevdschee/go-soft-token/keystore"
 )
+
+var version = "custom"
 
 // Config struct that holds account info
 type Config struct {
@@ -31,7 +34,7 @@ type Account struct {
 func readConfig(password, filename string) (Config, error) {
 	var config Config
 
-	data, err := file.Read(password, filename)
+	data, err := keystore.Read(password, filename)
 	if err != nil {
 		return config, err
 	}
@@ -51,7 +54,7 @@ func writeConfig(config Config, filename string) error {
 		return err
 	}
 
-	err = file.Write(password, filename, data)
+	err = keystore.Write(password, filename, data)
 	if err != nil {
 		return err
 	}
@@ -111,16 +114,14 @@ func main() {
 
 	drawSpinner := func() {
 		frames := []string{
-			"| o    |",
-			"|  o   |",
-			"|   o  |",
-			"|    o |",
-			"|     o|",
-			"|    o |",
-			"|   o  |",
-			"|  o   |",
-			"| o    |",
-			"|o     |",
+			"|o----|",
+			"|-o---|",
+			"|--o--|",
+			"|---o-|",
+			"|----o|",
+			"|---o-|",
+			"|--o--|",
+			"|-o---|",
 		}
 		spinnerIndex = (spinnerIndex + 1) % len(frames)
 		spinner.SetText(frames[spinnerIndex])
@@ -128,7 +129,7 @@ func main() {
 
 	updateTimer := func() {
 		for {
-			time.Sleep(250 * time.Millisecond)
+			time.Sleep(1 * time.Second)
 			app.QueueUpdateDraw(func() {
 				drawToken()
 				drawSpinner()
@@ -301,7 +302,7 @@ func main() {
 		SetItemPadding(3).
 		AddPasswordField("Password", "", 26, '*', nil).
 		AddButton("Ok", func() { go passwordSubmitHandler() }).
-		SetTitle(" Unlock ").
+		SetTitle("go-soft-token v"+version).
 		SetTitleColor(tcell.ColorYellow).
 		SetBorder(true).
 		SetBackgroundColor(tcell.NewHexColor(0x222222)).
