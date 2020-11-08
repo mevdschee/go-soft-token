@@ -3,7 +3,7 @@
 # go-soft-token
 
 A text-based cross-platform "software token" implementation (compatible with Google Authenticator and Microsoft Authenticator) written in Go.
-This software uses scrypt for key stretching and AES for TOTP secret storage.
+This software uses "scrypt" for key stretching and AES for TOTP secret storage.
 
 Blog post: https://tqdev.com/2020-free-otp-soft-token-written-in-go
 
@@ -13,9 +13,9 @@ See: https://en.wikipedia.org/wiki/Software_token
 
 This software is written in Go and uses modules (available in Go 1.11+)
 
-This software uses [gotp](https://github.com/xlzd/gotp) for it's TOTP implementation.
+This software uses [xlzd/gotp](https://github.com/xlzd/gotp) for it's TOTP implementation and scrypt from [x/crypto](https://github.com/gdamore/tcell).
 
-This software has a text user interface (TUI) and uses [tview](https://github.com/rivo/tview/), which is based on [tcell](https://github.com/gdamore/tcell).
+This software has a text user interface (TUI) and uses [rivo/tview](https://github.com/rivo/tview/), which is based on [gdamore/tcell](https://github.com/gdamore/tcell).
 
 ### Run and build
 
