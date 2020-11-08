@@ -8,4 +8,3 @@ This software is written in Go and uses modules (available in Go 1.11+)
 
 This software has a text user interface (TUI) and uses [tview](https://github.com/rivo/tview/), which is based on [tcell](https://github.com/gdamore/tcell).
 
-    go build -ldflags "-X main.version=$VERSION"
