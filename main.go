@@ -17,7 +17,7 @@ import (
 	"github.com/mevdschee/go-soft-token/keystore"
 )
 
-var version = "custom"
+var version string
 
 // Config struct that holds account info
 type Config struct {
@@ -297,12 +297,17 @@ func main() {
 		}
 	}
 
+	title := " go-soft-token "
+	if version != "" {
+		title += "v" + version + " "
+	}
+
 	passwordForm.
 		SetButtonsAlign(tview.AlignCenter).
 		SetItemPadding(3).
 		AddPasswordField("Password", "", 26, '*', nil).
 		AddButton("Ok", func() { go passwordSubmitHandler() }).
-		SetTitle("go-soft-token v"+version).
+		SetTitle(title).
 		SetTitleColor(tcell.ColorYellow).
 		SetBorder(true).
 		SetBackgroundColor(tcell.NewHexColor(0x222222)).
