@@ -7,7 +7,11 @@ This software TOTP implementation uses scrypt for key stretching and AES for TOT
 
 See: https://en.wikipedia.org/wiki/Software_token
 
+### Dependencies
+
 This software is written in Go and uses modules (available in Go 1.11+)
+
+This software uses [gotp](https://github.com/xlzd/gotp) for it's TOTP implementation.
 
 This software has a text user interface (TUI) and uses [tview](https://github.com/rivo/tview/), which is based on [tcell](https://github.com/gdamore/tcell).
 
