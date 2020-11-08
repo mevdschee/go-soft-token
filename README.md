@@ -27,4 +27,4 @@ This automatically increments the build version.
 
 ### Download
 
-Go to the [releases](https://github.com/mevdschee/go-soft-token/releases) section to download binaries and source code (Assets).
+Go to the [releases](https://github.com/mevdschee/go-soft-token/releases) section to download binaries and source code (click on 'Assets').
