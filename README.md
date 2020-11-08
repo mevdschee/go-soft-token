@@ -13,7 +13,7 @@ See: https://en.wikipedia.org/wiki/Software_token
 
 This software is written in Go and uses modules (available in Go 1.11+)
 
-This software uses [xlzd/gotp](https://github.com/xlzd/gotp) for it's TOTP implementation and scrypt from [x/crypto](https://github.com/gdamore/tcell).
+This software uses [xlzd/gotp](https://github.com/xlzd/gotp) for it's TOTP implementation and scrypt from [x/crypto](https://github.com/x/crypto).
 
 This software has a text user interface (TUI) and uses [rivo/tview](https://github.com/rivo/tview/), which is based on [gdamore/tcell](https://github.com/gdamore/tcell).
 
