@@ -10,4 +10,4 @@ This software has a text user interface (TUI) and uses [tview](https://github.co
 
 ### Download
 
-Go to the [releases](releases) section to download binaries and source code.
+Go to the [releases](https://github.com/mevdschee/go-soft-token/releases) section to download binaries and source code.
