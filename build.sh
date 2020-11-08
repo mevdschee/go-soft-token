@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gawk -i inplace -F '=' '/CURRENT_BUILD_VERSION/{$2=$2+1";"}1' OFS='='  version.env
+gawk -i inplace -F '=' '/CURRENT_BUILD_VERSION/{$2=$2+1}1' OFS='='  version.env
 
 source version.env
 
