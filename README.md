@@ -2,12 +2,12 @@
 
 # go-soft-token
 
-A text-based cross-platform "software token*" implementation (compatible with Google Authenticator and Microsoft Authenticator) written in Go.
+A text-based cross-platform "software token" implementation (compatible with Google Authenticator and Microsoft Authenticator) written in Go.
 This software uses scrypt for key stretching and AES for TOTP secret storage.
 
 Blog post: https://tqdev.com/2020-free-otp-soft-token-written-in-go
 
-*) See: https://en.wikipedia.org/wiki/Software_token
+See: https://en.wikipedia.org/wiki/Software_token
 
 ### Dependencies
 
