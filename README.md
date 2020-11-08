@@ -1,4 +1,4 @@
-![screenshot](go-soft-token.png)
+![screenshot](go-soft-token-v0.9.1.png)
 
 # go-soft-token
 
