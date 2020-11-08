@@ -1,3 +1,5 @@
+![screenshot](go-soft-token.png)
+
 # go-soft-token
 
 A text-based cross-platform software TOTP implementation (compatible with Google Authenticator and Microsoft Authenticator) written in Go.
