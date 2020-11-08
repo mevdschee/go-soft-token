@@ -13,7 +13,7 @@ This software has a text user interface (TUI) and uses [tview](https://github.co
 
 To run the software install Go and run:
 
-    go run
+    go run .
 
 To create an executable, run:
 
