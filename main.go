@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"os/exec"
-	"runtime"
 	"strings"
 	"time"
 
@@ -71,22 +69,6 @@ var password string
 var selectedIndex int
 var spinnerIndex int
 
-func openBrowser(url string) error {
-	var err error
-
-	switch runtime.GOOS {
-	case "linux":
-		err = exec.Command("xdg-open", url).Start()
-	case "windows":
-		err = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
-	case "darwin":
-		err = exec.Command("open", url).Start()
-	default:
-		err = fmt.Errorf("unsupported platform")
-	}
-	return err
-}
-
 func main() {
 	selectedIndex = 0
 	modal := func(p tview.Primitive, width, height int) tview.Primitive {
@@ -147,7 +129,7 @@ func main() {
 
 	updateTimer := func() {
 		for {
-			time.Sleep(1 * time.Second)
+			time.Sleep(100 * time.Millisecond)
 			app.QueueUpdateDraw(func() {
 				drawToken()
 				drawSpinner()
