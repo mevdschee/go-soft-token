@@ -14,7 +14,7 @@ import (
 const (
 	saltLength        = 32
 	keyLength         = 32
-	defaultWorkFactor = 18
+	defaultWorkFactor = 16
 )
 
 func encrypt(key, data []byte) ([]byte, error) {
